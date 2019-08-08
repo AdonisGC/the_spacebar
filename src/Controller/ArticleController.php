@@ -11,14 +11,14 @@ use Symfony\Component\HttpFoundation\Response;
 class ArticleController extends AbstractController
 {
     /**
-     * @Route("/")
+     * @Route("/", name="app_homepage")
      */
     public function homepage(){
-        return new Response('page testing');
+        return $this->render('article/homepage.html.twig');
     }
 
     /**
-     * @Route("/news/{slug}")
+     * @Route("/articles/{slug}", name="article_show")
      * @param $slug
      * @return Response
      */
@@ -33,5 +33,12 @@ class ArticleController extends AbstractController
             'title' => ucwords(str_replace('-', ' ', $slug)),
             'comments' => $comments
         ]);
+    }
+
+    /**
+     * @Route("/news/{slug}/heart", name="article_toggle")
+     */
+    public function toggleArticleHeart(){
+
     }
 }
